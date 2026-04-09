@@ -20,9 +20,19 @@ app.post("/sensor", (req, res) => {
     });
   }
 
-  let dados = {
-    device: device || "desconhecido",
+  const fs = require("fs");
+  let distanciaAnterior = null;
+  
+  // lê valor anterior
+  if (fs.existsSync("dados.json")) {
+    const dadosAntigos = JSON.parse(fs.readFileSync("dados.json"));
+    distanciaAnterior = dadosAntigos.distance;
+  }
+
+  const dados = {
+    device: device || "caixa01",
     distance: parseFloat(distance),
+    distanciaAnterior: distanciaAnterior,
     timestamp: new Date()
   };
 
