@@ -3,6 +3,14 @@ const fs = require("fs");
 
 const app = express();
 
+// Desbloquear Requisição cross-origin (CORS)
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET, POST");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+  next();
+});
+
 // permite receber POST do ESP32
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
