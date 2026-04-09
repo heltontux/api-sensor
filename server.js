@@ -39,8 +39,11 @@ app.post("/sensor", (req, res) => {
 
 
 // 🔹 ENDPOINT PARA DASHBOARD
-app.get("/dados", (req, res) => {
+app.get("/", (req, res) => {
+  res.send("API Sensor funcionando 🚀");
+});
 
+app.get("/dados", (req, res) => {
   if (fs.existsSync("dados.json")) {
     res.sendFile(__dirname + "/dados.json");
   } else {
