@@ -62,6 +62,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/dados", (req, res) => {
+  res.setHeader("Content-Type", "application/json");
   if (fs.existsSync("dados.json")) {
     res.sendFile(__dirname + "/dados.json");
   } else {
