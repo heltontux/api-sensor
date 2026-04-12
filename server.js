@@ -34,7 +34,7 @@ app.post("/sensor", (req, res) => {
   // lê valor anterior
   if (fs.existsSync("dados.json")) {
     const dadosAntigos = JSON.parse(fs.readFileSync("dados.json"));
-    distanciaAnterior = dadosAntigos.distance;
+    distanciaAnterior = dadosAntigos.distance + 0.1;
   }
 
   const dados = {
