@@ -21,6 +21,8 @@ app.post("/sensor", (req, res) => {
 
   const { device, distance } = req.body;
 
+  console.log("Distancia recebida: --> ", distance);
+
   if (!distance) {
     return res.json({
       status: "erro",
@@ -28,13 +30,13 @@ app.post("/sensor", (req, res) => {
     });
   }
 
-  const fs = require("fs");
   let distanciaAnterior = null;
   
   // lê valor anterior
   if (fs.existsSync("dados.json")) {
     const dadosAntigos = JSON.parse(fs.readFileSync("dados.json"));
-    distanciaAnterior = dadosAntigos.distance + 0.1;
+    distanciaAnterior = dadosAntigos.distance;
+    console.log("Anterior lida do arquivo: --> ", distanciaAnterior);
   }
 
   const dados = {
@@ -47,7 +49,7 @@ app.post("/sensor", (req, res) => {
   // salva em arquivo
   fs.writeFileSync("dados.json", JSON.stringify(dados, null, 2));
 
-  console.log("Recebido:", dados);
+  console.log("Dados salvos: --> ", dados);
 
   res.json({
     status: "ok",
