@@ -43,7 +43,7 @@ app.post("/sensor", (req, res) => {
     device: device || "caixa01",
     distance: parseFloat(distance),
     distanciaAnterior: distanciaAnterior,
-    timestamp: new Date()
+    timestamp: new Date().toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" })
   };
 
   // salva em arquivo
